@@ -31,7 +31,25 @@ BEGIN
 
 -- DODATI :
 -- brojac koji na osnovu izbrojanih sekundi pravi izlaz na LE diode
+	process (clk_i, rst_i) begin
+		if(rst_i = '1') then
+			counter_value_r <= "00000000";
+		elsif (clk_i'event and clk_i = '1') then
+				if (cnt_rst_i = '0') then
+					if (cnt_en_i = '1') then
+						
+						if(one_sec_i = '1') then
+							counter_value_r <= counter_value_r +1;
+						end if;
+					end if;
+				else
+					counter_value_r <= "00000000";
+			end if;
+			end if;
 
+	end process;
+	
+	led_o <= counter_value_r;
 
 
 END rtl;
